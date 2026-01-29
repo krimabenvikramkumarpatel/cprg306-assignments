@@ -1,11 +1,11 @@
-"use client";
-
 export default function GroceryItem({ name, quantity, category }) {
   return (
-    <li className="border rounded p-4 mb-2 bg-white shadow-sm hover:bg-gray-50">
-      <h2 className="font-semibold">{name}</h2>
-      <p>Quantity: {quantity}</p>
-      <p>Category: {category}</p>
+    <li className="flex justify-between items-center bg-white p-3 rounded-lg shadow">
+      <div>
+        <p className="font-semibold">{name}</p>
+        <p className="text-sm text-gray-600 capitalize">{category}</p>
+      </div>
+      <span className="font-bold text-blue-600">x{quantity}</span>
     </li>
   );
 }

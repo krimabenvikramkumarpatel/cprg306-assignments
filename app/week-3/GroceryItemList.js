@@ -1,5 +1,3 @@
-"use client";
-
 import GroceryItem from "./GroceryItem";
 
 export default function GroceryItemList() {
@@ -19,7 +17,7 @@ export default function GroceryItemList() {
   ];
 
   return (
-    <ul>
+    <ul className="space-y-3">
       {items.map((item, index) => (
         <GroceryItem
           key={index}
