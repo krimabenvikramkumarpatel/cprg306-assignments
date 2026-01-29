@@ -1,4 +1,4 @@
-import GroceryItem from "./GroceryItem";
+import Item from "./Item";
 
 export default function GroceryItemList() {
   const items = [
@@ -19,7 +19,7 @@ export default function GroceryItemList() {
   return (
     <ul className="space-y-3">
       {items.map((item, index) => (
-        <GroceryItem
+        <Item
           key={index}
           name={item.name}
           quantity={item.quantity}
