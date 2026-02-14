@@ -23,6 +23,12 @@ export default function HomePage() {
             Week 4 Assignment
           </Link>
         </li>
+        {/* Added Week 5 */}
+        <li>
+          <Link href="/week-5" className="text-blue-600 hover:underline">
+            Week 5 Assignment
+          </Link>
+        </li>
       </ul>
     </main>
   );
