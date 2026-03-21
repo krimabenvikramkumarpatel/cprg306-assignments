@@ -1,4 +1,4 @@
-"use client"; // make sure this runs in the browser
+"use client"; // <<< add this at the top
 
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
@@ -12,6 +12,5 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
