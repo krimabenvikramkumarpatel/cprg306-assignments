@@ -1,9 +1,13 @@
-"use client"; // <<< must be client component
+"use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
-import { signInWithPopup, signOut, onAuthStateChanged, GithubAuthProvider } from "../utils/firebase";
+import { useContext, createContext, useState, useEffect } from "react";
+import {
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged,
+  GithubAuthProvider,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
-
 
 const AuthContext = createContext();
 
@@ -33,4 +37,6 @@ export const AuthContextProvider = ({ children }) => {
   );
 };
 
-export const useUserAuth = () => useContext(AuthContext);
+export const useUserAuth = () => {
+  return useContext(AuthContext);
+};

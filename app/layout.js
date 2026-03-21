@@ -1,14 +1,9 @@
-import "./globals.css";
-import { AuthContextProvider } from "./contexts/AuthContext"; // Correct import
+import { AuthContextProvider } from "./contexts/AuthContext";
 
-export const metadata = {
-  title: "Shopping List",
-};
-
-export default function RootLayout({ children }) {
+export default function Layout({ children }) {
   return (
-    <html lang="en">
-      <body className="bg-slate-50 text-slate-900">
+    <html>
+      <body>
         <AuthContextProvider>
           {children}
         </AuthContextProvider>

@@ -1,38 +1,55 @@
 "use client";
 
+import { useState } from "react";
 import { useUserAuth } from "../../contexts/AuthContext";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import ItemList from "../../week-8/ItemList";
-import NewItem from "../../week-8/NewItem";
-import itemsData from "../../week-8/items.json"; // your JSON file
+
+import itemsData from "./items.json";
+import ItemList from "./ItemList";
+import NewItem from "./NewItem";
+import MealIdeas from "./MealIdeas";
 
 export default function ShoppingListPage() {
   const { user } = useUserAuth();
-  const router = useRouter();
+
   const [items, setItems] = useState(itemsData);
+  const [selectedItemName, setSelectedItemName] = useState("");
 
-  // Redirect if not logged in
-  useEffect(() => {
-    if (!user) {
-      router.push("/week-9");
-    }
-  }, [user, router]);
-
-  if (!user) {
-    return <p>Redirecting...</p>;
+  function handleAddItem(item) {
+    setItems([...items, item]);
   }
 
-  // Function to add a new item
-  const addItem = (newItem) => {
-    setItems((prevItems) => [...prevItems, newItem]);
-  };
+  function handleItemSelect(item) {
+    let cleanedName = item.name
+      .split(",")[0]
+      .trim();
 
+    setSelectedItemName(cleanedName);
+  }
+
+  // 🔒 PROTECT PAGE
+  if (!user) {
+    return <p>Please login first</p>;
+  }
+
+  // ✅ YOUR WEEK 8 UI
   return (
-    <main style={{ padding: "20px" }}>
+    <main>
       <h1>Shopping List</h1>
-      <NewItem onAddItem={addItem} />
-      <ItemList items={items} />
+
+      <div style={{ display: "flex", gap: "40px" }}>
+        <div>
+          <NewItem onAddItem={handleAddItem} />
+
+          <ItemList
+            items={items}
+            onItemSelect={handleItemSelect}
+          />
+        </div>
+
+        <div>
+          <MealIdeas ingredient={selectedItemName} />
+        </div>
+      </div>
     </main>
   );
 }

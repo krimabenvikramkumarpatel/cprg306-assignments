@@ -1,5 +1,3 @@
-"use client"; // <<< add this at the top
-
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
