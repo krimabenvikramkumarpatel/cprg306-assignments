@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "name": "Milk",
+    "quantity": 2,
+    "category": "dairy"
+  },
+  {
+    "id": "2",
+    "name": "Bread",
+    "quantity": 1,
+    "category": "bakery"
+  },
+  {
+    "id": "3",
+    "name": "Apples",
+    "quantity": 5,
+    "category": "produce"
+  },
+  {
+    "id": "4",
+    "name": "Chicken",
+    "quantity": 2,
+    "category": "meat"
+  }
+]

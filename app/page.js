@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 export default function HomePage() {
@@ -47,6 +49,12 @@ export default function HomePage() {
         <li>
           <Link href="/week-8" className="text-blue-600 hover:underline">
             Week 8 Assignment
+          </Link>
+        </li>
+
+        <li>
+          <Link href="/week-9" className="text-blue-600 hover:underline">
+            Week 9 Assignment
           </Link>
         </li>
       </ul>
