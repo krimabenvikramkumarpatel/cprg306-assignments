@@ -7,36 +7,31 @@ export default function ItemList({ items, onItemSelect }) {
 
   const [sortBy, setSortBy] = useState("name");
 
-  const sortedItems = [...items].sort((a,b)=>{
-
-    if(a[sortBy] < b[sortBy]) return -1;
-    if(a[sortBy] > b[sortBy]) return 1;
+  const sortedItems = [...items].sort((a, b) => {
+    if (a[sortBy] < b[sortBy]) return -1;
+    if (a[sortBy] > b[sortBy]) return 1;
     return 0;
-
   });
 
   return (
-
     <div>
 
-      <button onClick={()=>setSortBy("name")}>
+      <button onClick={() => setSortBy("name")}>
         Sort by Name
       </button>
 
-      <button onClick={()=>setSortBy("category")}>
+      <button onClick={() => setSortBy("category")}>
         Sort by Category
       </button>
 
       <ul>
-
-        {sortedItems.map((item,index)=>(
+        {sortedItems.map((item) => (
           <Item
-            key={index}
+            key={item.id}
             item={item}
-            onSelect={onItemSelect}
+            onItemSelect={onItemSelect}  
           />
         ))}
-
       </ul>
 
     </div>

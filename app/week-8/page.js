@@ -13,13 +13,13 @@ export default function Page() {
   const [selectedItemName, setSelectedItemName] = useState("");
 
   function handleAddItem(item) {
-    setItems([...items, item]);
+    setItems((prevItems) => [...prevItems, item]);  
   }
 
   function handleItemSelect(item) {
-
-    let cleanedName = item.name
+    const cleanedName = item.name
       .split(",")[0]
+      .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, "") 
       .trim();
 
     setSelectedItemName(cleanedName);
@@ -30,23 +30,19 @@ export default function Page() {
 
       <h1>Shopping List</h1>
 
-      <div style={{display:"flex", gap:"40px"}}>
+      <div style={{ display: "flex", gap: "40px" }}>
 
         <div>
-
           <NewItem onAddItem={handleAddItem} />
 
           <ItemList
             items={items}
             onItemSelect={handleItemSelect}
           />
-
         </div>
 
         <div>
-
           <MealIdeas ingredient={selectedItemName} />
-
         </div>
 
       </div>
