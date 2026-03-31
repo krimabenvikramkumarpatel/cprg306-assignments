@@ -26,12 +26,11 @@ export default function ShoppingListPage() {
     setSelectedItemName(cleanedName);
   }
 
-  // 🔒 PROTECT PAGE
+
   if (!user) {
     return <p>Please login first</p>;
   }
 
-  // ✅ YOUR WEEK 8 UI
   return (
     <main>
       <h1>Shopping List</h1>

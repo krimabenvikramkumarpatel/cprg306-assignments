@@ -7,6 +7,7 @@ import { getItems, addItem } from "../_services/shopping-list-service";
 import ItemList from "./ItemList";
 import NewItem from "./NewItem";
 import MealIdeas from "./MealIdeas";
+import Link from "next/link";
 
 export default function ShoppingListPage() {
   const { user } = useUserAuth();
@@ -14,7 +15,7 @@ export default function ShoppingListPage() {
   const [items, setItems] = useState([]);
   const [selectedItemName, setSelectedItemName] = useState("");
 
-  // Load items from Firestore
+  // load items when user logs in
   async function loadItems() {
     if (!user) return;
 
@@ -22,26 +23,39 @@ export default function ShoppingListPage() {
     setItems(items);
   }
 
-  // Run when user is available
   useEffect(() => {
-    loadItems();
+    if (user) {
+      loadItems();
+    }
   }, [user]);
 
-  // Add item to Firestore + state
+  // add new item
   async function handleAddItem(item) {
-    const id = await addItem(user.uid, item);
+    if (!user) return;
 
+    const id = await addItem(user.uid, item);
     const newItem = { id, ...item };
-    setItems([...items, newItem]);
+
+    setItems((prevItems) => [...prevItems, newItem]);
   }
 
+  // clean item name before sending to MealIdeas
   function handleItemSelect(item) {
-    let cleanedName = item.name.split(",")[0].trim();
+    const cleanedName = item.name
+      .split(",")[0]
+      .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, "")
+      .trim();
+
     setSelectedItemName(cleanedName);
   }
 
   if (!user) {
-    return <p>Please login first</p>;
+    return (
+      <div>
+        <p>Please login first</p>
+        <Link href="/week-10">Go back</Link>
+      </div>
+    );
   }
 
   return (
@@ -51,11 +65,7 @@ export default function ShoppingListPage() {
       <div style={{ display: "flex", gap: "40px" }}>
         <div>
           <NewItem onAddItem={handleAddItem} />
-
-          <ItemList
-            items={items}
-            onItemSelect={handleItemSelect}
-          />
+          <ItemList items={items} onItemSelect={handleItemSelect} />
         </div>
 
         <div>

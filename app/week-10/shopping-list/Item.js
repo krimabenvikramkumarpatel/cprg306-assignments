@@ -1,14 +1,11 @@
-export default function Item({ item, onSelect }) {
+"use client";
 
+export default function Item({ item, onItemSelect }) {
   return (
-    <li onClick={() => onSelect(item)} style={{cursor:"pointer"}}>
-
-      <h3>{item.name}</h3>
-
-      <p>
-        Quantity: {item.quantity} | Category: {item.category}
-      </p>
-
-    </li>
+    <div>
+      <button onClick={() => onItemSelect(item)}>
+        {item.name} (x{item.quantity})
+      </button>
+    </div>
   );
 }

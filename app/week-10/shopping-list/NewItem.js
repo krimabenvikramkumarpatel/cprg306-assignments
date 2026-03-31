@@ -2,84 +2,55 @@
 
 import { useState } from "react";
 
-const initialState = {
-  name: "",
-  quantity: 1,
-  category: "produce",
-};
-
 export default function NewItem({ onAddItem }) {
-  const [item, setItem] = useState(initialState);
+  const [name, setName] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [category, setCategory] = useState("produce");
 
-  const handleChange = (e) => {
-    const { name, value, type } = e.target;
-
-    setItem((prev) => ({
-      ...prev,
-      [name]: type === "number" ? Number(value) : value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
 
-    const newItem = {
-      ...item,
-      id: crypto.randomUUID(),
+    const item = {
+      name,
+      quantity,
+      category,
     };
 
-    onAddItem(newItem);
+    onAddItem(item);
 
-    setItem(initialState);
-  };
+    setName("");
+    setQuantity(1);
+    setCategory("produce");
+  }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white p-4 rounded-lg shadow-md space-y-4 mb-6"
-    >
+    <form onSubmit={handleSubmit}>
       <input
-        name="name"
-        value={item.name}
-        onChange={handleChange}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
         placeholder="Item name"
         required
-        className="border p-2 w-full text-black"
       />
 
       <input
         type="number"
-        name="quantity"
-        value={item.quantity}
-        onChange={handleChange}
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
         min="1"
-        className="border p-2 w-full text-black"
       />
 
       <select
-        name="category"
-        value={item.category}
-        onChange={handleChange}
-        className="border p-2 w-full text-black"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
       >
         <option value="produce">Produce</option>
         <option value="dairy">Dairy</option>
-        <option value="bakery">Bakery</option>
         <option value="meat">Meat</option>
-        <option value="frozen">Frozen</option>
-        <option value="canned">Canned</option>
-        <option value="dry">Dry Goods</option>
-        <option value="snacks">Snacks</option>
-        <option value="beverages">Beverages</option>
+        <option value="bakery">Bakery</option>
         <option value="household">Household</option>
       </select>
 
-      <button
-        type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        Add Item
-      </button>
+      <button type="submit">Add Item</button>
     </form>
   );
 }

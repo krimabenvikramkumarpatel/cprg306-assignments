@@ -14,10 +14,16 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const gitHubSignIn = () => {
+const gitHubSignIn = async () => {
+  try {
     const provider = new GithubAuthProvider();
-    return signInWithPopup(auth, provider);
-  };
+    const result = await signInWithPopup(auth, provider);
+    console.log("Login success:", result.user);
+    return result.user;
+  } catch (error) {
+    console.error("Login error:", error.message);
+  }
+};
 
   const firebaseSignOut = () => {
     return signOut(auth);
